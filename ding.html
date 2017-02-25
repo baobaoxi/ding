@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>React Tutorial</title>
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/ding.css">
+</head>
+    <body ng-app="myApp" ng-controller="myCtrl">
+        <span class="title" ng-click="alert()">每月一次叮~~</span>
+        <div class="main-wrap">
+        <div class="m-type-wrap ng-hide" >
+            <select ng-model="ticketTypeModel" ng-options="x.val for x in ticketType"></select>
+            <span class="type-tip" ng-show="ticketTypeModel.key==1">以下日子9点前回家啦</span>
+            <span class="type-tip" ng-show="ticketTypeModel.key==2">这些日子加班到很晚ಥ_ಥ</span>
+        </div>
+        <div class="m-date-se">
+            <label>起止日期：</label>
+            <input type="date" ng-model="startDate">至<input type="date" ng-model="endDate">
+        </div>
+        <div class="m-time-wrap clearfix">
+            <div class="time-left">
+                <span ng-repeat="item in timeList track by $index">
+                    <input type="date" class="time-input" ng-model="timeList[$index]" ng-change="showList()">
+                    <span class="date-del" ng-click="dateDelete($index)">删除</span>
+                </span>
+            </div>
+            <div class="time-right">
+                <span class="time-add" ng-click="addDate()">添加日期</span>
+            </div> 
+        </div>
+        <div class="mileage-wrap">
+            <label>公司到家的理想距离:</label>
+            <input type="text" ng-model="mileageModel">
+        </div>
+        <span class="btn btn-blue" ng-click="ticketSubmit()">出票</span>
+            </div>
+        
+        <div class="result-wrap">
+            <div ng-repeat = 'item in lastData track by $index'>
+                <span >{{item.day}}</span>
+                 <span >{{item.time}}</span>
+                 <span >{{item.price}}</span>
+            </div>
+            <span>总额：{{lasttotalmoney}}</span>
+        </div>
+    </body>
+    <script src="./js/ding.js"></script>
+</html>

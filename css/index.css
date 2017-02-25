@@ -5,3 +5,9 @@
     display: block;
     text-align: center;
 }
+.time-wrap span{
+    display: none;
+}
+.time-wrap span.show{
+    display: block;
+}
