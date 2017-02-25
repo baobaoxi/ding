@@ -170,8 +170,8 @@ app.controller('myCtrl', function($scope) {
        
         
     }
-    $scope.getWorkDay = function(){
-        var dayList = angular.copy($scope.allDaysList);
+    $scope.getWorkDay = function(allDaysList){
+        var dayList = angular.copy(allDaysList);
 //        console.log(dayList);
         var lastDayList = [];
         for(var i = 0 ; i < dayList.length;i++){
@@ -186,21 +186,23 @@ app.controller('myCtrl', function($scope) {
         $scope.getData(lastDayList)
     }
     $scope.getSurplusDays = function(){
+        var allDaysList = angular.copy($scope.allDaysList);
         for(var i = 0;i< $scope.allDaysList.length;i++){
             for (var j = 0;j<$scope.daysList.length;j++){
-                if($scope.allDaysList[i] == $scope.daysList[j]){
-                    $scope.allDaysList.splice(i,1);
+                if(allDaysList[i] == $scope.daysList[j]){
+//                    console.log(allDaysList[i])
+                    allDaysList.splice(i,1);
                 }
             }
         }
-        $scope.getWorkDay();
+        $scope.getWorkDay(allDaysList);
     }
     $scope.renderExtDays = function(){
         
         for(var i = 0;i<$scope.timeList.length;i++){
             var dateitem = $scope.timeList[i];
             var year = dateitem.getFullYear();
-            var month = dateitem.getMonth().toString().length==1?"0"+dateitem.getMonth().toString():dateitem.getMonth();
+            var month = (dateitem.getMonth()+1).toString().length==1?"0"+(dateitem.getMonth()+1).toString():dateitem.getMonth()+1;
             var day = dateitem.getDate().toString().length==1?"0"+dateitem.getDate():dateitem.getDate();
             $scope.daysList.push(year+"-"+month+"-"+day);
         }
