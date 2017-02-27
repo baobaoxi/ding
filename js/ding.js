@@ -44,16 +44,19 @@ app.controller('myCtrl', function($scope) {
         $scope.lasttotalmoney = 0;
         var timeFun = function(type){
             if(type == 1){
-                return '21:'+parseInt(Math.random()*29+1,10);
+                var lasttime = parseInt(Math.random()*29+1,10);
+                return '21:'+((lasttime > 9)?lasttime : ('0'+lasttime));
             }
             if(type == 2){
                 return '21:'+parseInt(Math.random()*29+1+30,10);
             }
             if(type == 3){
-                return '22:'+parseInt(Math.random()*59+1,10);
+                var lasttime = parseInt(Math.random()*59+1,10);
+                return '22:'+((lasttime > 9)?lasttime : ('0'+lasttime));
             }
             if(type == 4){
-                return '23:'+parseInt(Math.random()*30+1,10);
+                var lasttime = parseInt(Math.random()*30+1,10);
+                return '23:'+((lasttime > 9)?lasttime : ('0'+lasttime));
             }
         }
          var basicFun = function(type){
@@ -164,8 +167,16 @@ app.controller('myCtrl', function($scope) {
             }
         }
     
-//        $scope.lastData = day1list + day2list + day3list+ day4list;
-//        console.log($scope.lastData);
+
+        function compare(property){
+            return function(a,b){
+                var value1 = a[property];
+                var value2 = b[property];
+        //        return value1 - value2;
+                return value1 <= value2 ? -1 : 1
+            }
+        }
+        $scope.lastData.sort(compare('day'));
         
        
         
